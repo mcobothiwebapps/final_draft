@@ -105,7 +105,7 @@
                             <p class="card-text">First Name: {{ User.first_name}}</p>
                             <p class="card-text">Last Name: {{ User.last_name }}</p>
                             <form action="{{ url_for('update_profile') }}" method="post">
-                                <button class="btn btn-primary" type="submit">update</button>
+                                <button class="btn btn-primary" type="submit">Edit Profile</button>
                             </form>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
 <div class="sidebar" style="height: calc(100vh - 130px);"> <!-- 130px is the combined height of navbar and footer -->
     <a href="{{ url_for('vacancies')}}">Apply Now</a>
     <a href="{{ url_for('track') }}">Track Application</a>
-    <a href="{{ url_for('view_profile' )}}">Update Profile</a>
+    <a href="{{ url_for('profile' )}}">Update Profile</a>
     {% if current_user.is_authenticated %}
         <p>Logged in as: {{ current_user.username }}</p>
         <a href="/logout">Logout</a>

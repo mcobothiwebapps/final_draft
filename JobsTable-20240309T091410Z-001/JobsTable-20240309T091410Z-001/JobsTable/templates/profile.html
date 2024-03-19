@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - EduMatch{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mt-4 mb-5">Profile</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Profile Information</h5>
+                        <hr>
+                        <form id="editProfileForm" method="post">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" name="first_name" value="{{ user.first_name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" name="last_name" value="{{ user.last_name }}" required>
+                            </div>
+                            <button id="saveProfileButton" class="btn btn-primary btn-block">Save</button>
+                            <a href="{{ url_for('profile') }}" id="updateProfileButton" class="btn btn-secondary btn-block" style="display: none;">Update Profile</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show the form for editing when the page loads
+            document.getElementById('editProfileForm').style.display = 'block';
+
+            document.getElementById('saveProfileButton').addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var form = document.getElementById('editProfileForm');
+                var formData = new FormData(form);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '{{ url_for('update_user_profile') }}', true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Handle successful response, if needed
+                        console.log('Profile updated successfully');
+                        // Show the "Update Profile" button
+                        document.getElementById('updateProfileButton').style.display = 'block';
+                    } else {
+                        // Handle error response, if needed
+                        console.error('Failed to update profile');
+                    }
+                };
+                xhr.send(formData);
+            });
+        });
+    </script>
+     {% if request.path not in ['/', '/home', '/about', '/login','/signup'] %}
+     <div class="sidebar" style="height: calc(100vh - 130px);"> <!-- 130px is the combined height of navbar and footer -->
+         <a href="{{ url_for('vacancies')}}">Apply Now</a>
+         <a href="{{ url_for('track') }}">Track Application</a>
+         <a href="{{ url_for('profile' )}}">Update Profile</a>
+         {% if current_user.is_authenticated %}
+             <p>Logged in as: {{ current_user.username }}</p>
+             <p>First Name: {{ current_user.first_name }}</p>
+             <p>Last Name: {{ current_user.last_name }}</p>
+             <a href="/logout">Logout</a>
+         {% else %}
+             <a href="/login">Login</a>
+         {% endif %}
+         <!-- Add more links for other admin pages -->
+     </div>
+     {% endif %}
+{% endblock %}

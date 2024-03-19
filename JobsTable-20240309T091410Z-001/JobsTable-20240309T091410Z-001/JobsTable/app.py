@@ -2,9 +2,11 @@
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask import abort
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required,current_user
 
 from models import db, Job, User, Application, Department
+from itsdangerous import URLSafeTimedSerializer, BadSignature
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
@@ -20,10 +22,11 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 # Initialize Flask-Mail
-# Mail = mail(app)
+
+mail = Mail(app)
 
 # Initialize URLSafeTimedSerializer with a secret key
-# serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
 
 db.init_app(app)
 
@@ -309,11 +312,12 @@ def applications():
     return render_template('applications.html', application=application)
 
 
-@app.route('/view_profile')
+@app.route('/profile')
 @login_required
-def view_profile():
-    return render_template('view_profile.html')
-
+def profile():
+    user = current_user  # Assuming current_user is imported correctly
+    update_user_profile_url = url_for('update_user_profile')  # Get URL for update_user_profile route
+    return render_template('profile.html', user=user, update_user_profile_url=update_user_profile_url)
 
 @app.route('/update_department/<int:department_id>', methods=['GET', 'POST'])
 @login_required
@@ -365,6 +369,67 @@ def track_application(application_id):
 def track():
     return render_template('track_application.html')
 
+@app.route('/update_user_profile', methods=['POST'])
+@login_required
+def update_user_profile():
+    if request.method == 'POST':
+        # Assuming you have a form in the HTML with input fields for the user profile data
+        # Retrieve the updated profile data from the form
+        username = request.form['username']
+        email = request.form['email']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        
+        # Update the user's profile in the database
+        current_user.username = username
+        current_user.email = email
+        current_user.first_name = first_name
+        current_user.last_name = last_name
+        db.session.commit()
+        
+        # Redirect the user to the profile page after updating
+        return redirect(url_for('profile'))
+    
+# Define the route for forgot password
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        user = User.query.filter_by(email=email).first()
+
+        if user:
+            # Generate a token for password reset
+            token = serializer.dumps(email, salt='password-reset')
+
+            # Send the password reset link to the user via email
+            reset_link = url_for('reset_password', token=token, _external=True)
+
+            # Send email
+            msg = Message(subject="Password Reset Request",
+                          recipients=[email],
+                          body=f"Hi {user.username},\n\n"
+                               f"Please follow this link to reset your password: {reset_link}\n\n"
+                               f"If you didn't request this, please ignore this email.",
+                          sender="mlungisimnembe075@gmail.com")  # Change this to your email address
+            mail.send(msg)
+
+            flash("Password reset link has been sent to your email.", 'success')
+            return redirect(url_for('login'))
+        else:
+            flash("Email address not found. Please try again.", 'error')
+            return redirect(url_for('forgot_password'))
+
+    return render_template('forgot_password.html')
+
+# Define the route for resetting password
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if request.method == 'POST':
+        # Add password reset logic here
+        return redirect(url_for('login'))  # Redirect to login after resetting password
+
+    # Render a form for resetting password
+    return render_template('reset_password.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
