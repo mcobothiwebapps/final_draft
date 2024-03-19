@@ -357,17 +357,26 @@ def department_details():
     return render_template('department_details.html', departments=departments)
 
 
-@app.route('/track/<int:application_id>', methods=['POST', 'GET'])
+@app.route('/track_application', methods=['POST', 'GET'])
 @login_required
-def track_application(application_id):
-    user_application = Application.query.get(application_id)
-    return render_template('track_application.html', user_application=user_application)
-
+def track_application():
+        user = User.query.filter_by(id=current_user.id).first()
+        application = Application.query.filter_by(email=user.email).all()
+        if application:
+            return render_template('track_application.html',applications=application)
+        else:
+            print(user.email)
 
 @app.route('/track', methods=['POST', 'GET'])
 @login_required
 def track():
-    return render_template('track_application.html')
+    user = User.query.filter_by(id=current_user.id).first()
+    application = Application.query.filter_by(email=user.email).all()
+    if application:
+        return render_template('track_application.html',applications=application)
+    else:
+        print(user.email)
+    
 
 @app.route('/update_user_profile', methods=['POST'])
 @login_required

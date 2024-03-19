@@ -95,7 +95,7 @@ color: white; /* Set text color */
     <h2 class="text-center">Track Application</h2><br>
     <h3 class="text-center">Here are the positions you applied for.</h3>
     <div class="col text-center">
-        {% for applications in application %}
+        {% for application in applications %}
         <div class="col-md-4">
             <div class="card mb-3">
                 <div class="card-body">
@@ -113,7 +113,7 @@ color: white; /* Set text color */
                     <p class="card-text">Experience: {{ application.experience }}</p>
                     <p class="card-text">skill: {{ application.skill }}</p>
                     <p class="card-text">Date Created: {{ application.created_at }}</p>
-
+                    <p class="card-text">Status: {{ application.status }}</p>
                 </div>
             </div>
         </div>

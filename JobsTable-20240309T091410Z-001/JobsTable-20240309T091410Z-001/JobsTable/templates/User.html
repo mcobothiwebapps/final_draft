@@ -118,7 +118,7 @@
 {% if request.path not in ['/', '/home', '/about', '/login','/signup'] %}
 <div class="sidebar" style="height: calc(100vh - 130px);"> <!-- 130px is the combined height of navbar and footer -->
     <a href="{{ url_for('vacancies')}}">Apply Now</a>
-    <a href="{{ url_for('track') }}">Track Application</a>
+    <a href="{{ url_for('track_application') }}">Track Application</a>
     <a href="{{ url_for('profile' )}}">Update Profile</a>
     {% if current_user.is_authenticated %}
         <p>Logged in as: {{ current_user.username }}</p>
