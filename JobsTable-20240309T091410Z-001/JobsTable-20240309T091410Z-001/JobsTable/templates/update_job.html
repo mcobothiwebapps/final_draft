@@ -1,0 +1,101 @@
+<!-- templates/update_job.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Job</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #d8f6ff;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3498db;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #a5cfeb;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #164564;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #000000;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #54a5db;
+            color: #fffdfd;
+            border: 1px solid;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .back-button {
+            
+            margin: 10px auto; /* Adjusted margin */
+            padding: 8px 16px; /* Smaller padding */
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: 1px solid #000000; /* Added border */
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background-color: #6fb9eb;
+        }
+        
+    </style>
+</head>
+<body>
+
+  <h1>Update Job</h1>
+
+  <form method="POST" action="{{ url_for('update_job', job_id=job.id) }}">
+    <label for="title">Job Title</label>
+    <input type="text" id="title" name="title" value="{{ job.title }}" required>
+
+    <label for="description">Job Description</label>
+    <textarea id="description" name="description" required>{{ job.description }}</textarea>
+
+    <label for="requirements">Requirements</label>
+    <input type="text" id="requirements" name="requirements" value="{{ job.requirements }}" required>
+
+    <label for="hours">Hours</label>
+    <input type="text" id="hours" name="hours" value="{{ job.hours }}" required>
+
+    <button type="submit">Save Job</button>
+  </form>
+
+  <a class="back-button" href="/">Return to Job Listings</a>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - EduMatch{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Global styles */
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        text-decoration: none;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #6b8294; /* Set background color */
+        color: #6b8294; /* Set text color */
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: x-large;
+        padding: 10px;
+        border: 2px solid #6b8294;
+        border-radius: 5px;
+        background-color: #899BA9; /* Set background color */
+        color: white; /* Set text color */
+    }
+
+    form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #c0cad2; /* Set background color */
+        border-radius: 10px;
+        box-shadow: 0 0 10px black; /* Add box shadow */
+    }
+
+   label {
+    display: block;
+    color: #000000; /* Black color */
+    margin-bottom: 8px;
+}
+
+
+    input, textarea {
+        width: 100%;
+        padding: 5px 0 5px 6px;
+        border-radius: 3px;
+        border: 1px solid #6b8294;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #899BA9; /* Set background color */
+        color: white; /* Set text color */
+    }
+
+    input:focus, textarea:focus {
+        border: 1px solid #899BA9;
+        box-shadow: 0 0 10px #0056b3;
+        outline: none !important;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #899BA9;
+        color: white;
+        border: 2px solid #6b8294;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+input::placeholder,
+textarea::placeholder {
+    color: #c1c1c1; /* Set placeholder text color to yellow */
+
+.back-button:hover,
+.second:hover {
+    background-color: #728491 !important; /* Darker color when hovered */
+}
+
+.main-content1 {
+    margin-top: 80px;
+    padding: 20px 45px 20px 25px;
+    width: 59%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #c0cad2; /* Set background color */
+    border-radius: 10px;
+    box-shadow: 0 0 10px black; /* Add box shadow */
+}
+
+</style>
+<body>
+<div class="main-content1">
+    <form action="{{ url_for('post_job') }}" class="second" method="POST">
+        <h1><strong>POST A JOB</strong></h1>
+
+        <!-- Add dropdown list for department selection -->
+<!--        <label for="department">Department:</label>-->
+<!--        <select id="department" name="department" required>-->
+<!--            <option value="#">Select Department</option>-->
+<!--            {% for department in departments %}-->
+<!--            <option value="{{ department.id }}">{{ department.name }}</option>-->
+<!--            {% endfor %}-->
+<!--        </select>-->
+        <label for="department_name">Department Name</label>
+        <select name="department_name" class="form-control">
+            {% for item in depart%}
+            <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}
+        </select>
+
+
+        <label for="department_id">Department ID</label>
+        <input id="department_id" name="department_id" placeholder="Enter Department id" required type="text">
+
+        <label for="title">Job Title</label>
+        <input id="title" name="title" placeholder="Enter job title" required type="text">
+
+        <label for="description">Job Description</label>
+        <textarea id="description" name="description" placeholder="Enter job description" required></textarea>
+
+        <label for="requirements">Requirements</label>
+        <input id="requirements" name="requirements" placeholder="Enter job requirements" required type="text">
+
+        <label for="hours">Hours</label>
+        <input id="hours" name="hours" placeholder="Enter hours" required type="text">
+
+
+        <label for="deadline">Closing Date</label>
+        <input id="deadline" name="deadline" required type="datetime-local">
+
+
+
+
+
+        <div style="display: flex; justify-content: space-between;">
+            <button class="back-button" onclick="window.location.href='{{ url_for('Admin')}}'" type="button">Back</button>
+            <button class="second" type="submit">Post Job</button>
+        </div>
+    </form>
+</div>
+</body>
+{% endblock %}

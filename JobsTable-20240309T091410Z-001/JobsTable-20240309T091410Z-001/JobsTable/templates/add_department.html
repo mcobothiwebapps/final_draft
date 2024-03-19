@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - EduMatch{% endblock %}
+
+{% block content %}
+
+<style>
+    /* Global styles */
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        text-decoration: none;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #6b8294; /* Set background color */
+        color: #6b8294; /* Set text color */
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+        font-size: x-large;
+        padding: 10px;
+        border: 2px solid #6b8294;
+        border-radius: 5px;
+        background-color: #899BA9; /* Set background color */
+        color: white; /* Set text color */
+    }
+
+    form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #c0cad2; /* Set background color */
+        border-radius: 10px;
+        box-shadow: 0 0 10px black; /* Add box shadow */
+    }
+
+   label {
+    display: block;
+    color: #000000; /* Black color */
+    margin-bottom: 8px;
+}
+
+
+    input, textarea {
+        width: 100%;
+        padding: 5px 0 5px 6px;
+        border-radius: 3px;
+        border: 1px solid #6b8294;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #899BA9; /* Set background color */
+        color: white; /* Set text color */
+    }
+
+    input:focus, textarea:focus {
+        border: 1px solid #899BA9;
+        box-shadow: 0 0 10px #0056b3;
+        outline: none !important;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #899BA9;
+        color: white;
+        border: 2px solid #6b8294;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+input::placeholder,
+textarea::placeholder {
+    color: #c1c1c1; /* Set placeholder text color to yellow */
+
+.back-button:hover,
+.second:hover {
+    background-color: #728491 !important; /* Darker color when hovered */
+}
+
+.main-content1 {
+    margin-top: 80px;
+    padding: 20px 45px 20px 25px;
+    width: 59%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #c0cad2; /* Set background color */
+    border-radius: 10px;
+    box-shadow: 0 0 10px black; /* Add box shadow */
+}
+
+</style>
+<body>
+ <div class="main-content1">
+ <form action="{{ url_for('add_department') }}" method="POST">
+    <h1><strong>Add Department</strong></h1>
+
+    <label for="name">Department Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="faculty">Faculty:</label><br>
+        <input type="text" id="faculty" name="faculty" required><br><br>
+
+    <div style="display: flex; justify-content: space-between;">
+        <button class="back-button" type="button" onclick="window.location.href='{{ url_for('department_details') }}'">Back</button>
+        <button class="second" type="submit">Add Department</button>
+    </div>
+</form>
+ </div>
+
+
+{% if request.path not in ['/', '/home', '/about'] %}
+<div class="sidebar" style="height: calc(100vh - 130px);"> <!-- 130px is the combined height of navbar and footer -->
+    <a href="/admin/application">Applications</a>
+    <a href="{{ url_for('Admin') }}">Post Jobs</a>
+    <a href="{{ url_for('department_details') }}">Departments</a>
+    <p>Logged in as: </p>
+    <p>Admin</p>
+    <a href="/logout">Logout</a>
+    <!-- Add more links for other admin pages -->
+</div>
+{% endif %}
+</body>
+{% endblock %}

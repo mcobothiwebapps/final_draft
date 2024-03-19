@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - EduMatch{% endblock %}
+
+{% block content %}
+<style>
+    /* Global styles */
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        text-decoration: none;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+/* Form styles */
+body {
+margin: 0;
+width: 100%;
+padding: 0;
+align-items: center;
+background-color: #6b8294; /* Set background color */
+<textarea name="" id="" cols="30" rows="10"></textarea>
+color: #6b8294; /* Set text color */
+}
+
+.main-content {
+margin-top: 80px;
+padding: 20px 45px 20px 25px;
+width: 59%;
+margin-left: auto;
+margin-right: auto;
+background-color: #c0cad2; /* Set background color */
+border-radius: 10px;
+box-shadow: 0 0 10px black; /* Add box shadow */
+}
+
+h1 {
+font-size: x-large;
+text-align: center;
+padding: 10px;
+margin-top: 30px;
+border: 2px solid #6b8294;
+border-radius: 5px;
+background-color: #899BA9; /* Set background color */
+color: white; /* Set text color */
+}
+
+input,
+textarea {
+width: 100%;
+padding: 5px 0 5px 6px;
+border-radius: 3px;
+border: 1px solid #6b8294;
+display: block;
+margin-top: 10px;
+margin-bottom: 10px;
+background-color: #899BA9; /* Set background color */
+color: white; /* Set text color */
+}
+
+input:focus,
+textarea:focus {
+border: 1px solid #899BA9;
+box-shadow: 0 0 10px #0056b3;
+outline: none !important;
+}
+
+input[type='submit'] {
+width: 50%;
+margin-left: 25%;
+background:#899BA9;
+font-size: large;
+align-items: center;
+color: white;
+border: 2px solid #6b8294;
+border-radius: 5px;
+padding: 10px 20px;
+cursor: pointer;
+display: block;
+margin-top: 20px;
+transition: background-color 0.3s; /* Smooth transition effect */
+
+}
+input::placeholder,
+textarea::placeholder {
+color: #c1c1c1; /* Set placeholder text color to yellow */
+}
+
+input[type='submit']:hover {
+background-color: #728491; /* Darker color when hovered */
+}
+
+
+</style>
+
+<!--APPLICATION FORM-->
+<div class="main-content">
+    <form action="{{url_for('submit_application')}}" enctype="multipart/form-data" method="POST">
+        <h1><strong>Application Form</strong></h1>
+
+        <label for="student_number"><strong>Student Number</strong></label>
+        <input name="student_number" class="student_number" id="student_number" maxlength="6" minlength="6" placeholder="Enter Student Number" required type="number">
+
+        <label for="name"><strong>Name</strong></label>
+        <input name="name" class="name" id="name" placeholder="Enter Name" required type="text">
+
+        <label for="surname"><strong>Surname</strong></label>
+        <input name="surname" class="surname" id="surname" placeholder="Enter Surname" required type="text">
+
+        <label for="id_number"><strong>ID Number</strong></label>
+        <input name="id_number" class="id_number" id="id_number" maxlength="13" minlength="13" placeholder="Enter ID Number" required type="number">
+
+        <label for="email"><strong>Email</strong></label>
+        <input name="email" class="email" id="email" placeholder="Enter Email Address" required type="email">
+
+        <label for="course"><strong>Course</strong></label>
+        <input name="course" class="course" id="course" placeholder="Enter Course" required type="text">
+
+        <label for="academic_background"><strong>Academic Background</strong></label>
+        <textarea name="academic_background" class="academic" id="academic_background"
+                  placeholder="Please tell us details of academic background including institutions attended, degrees earned, majors or fields of study, and relevant academic achievements."
+                  required rows="5"></textarea>
+
+        <label for="experience"><strong>Experience</strong></label>
+        <textarea name="experience" class="experience" id="experience"
+                  placeholder="Please provide a detailed description of your relevant work experience, including job titles, responsibilities, and accomplishments."
+                  required rows="5"></textarea>
+
+        <label for="skills"><strong>Skills</strong></label>
+        <textarea name="skills" class="skills" id="skills"
+                  placeholder="Please provide specific examples of how you have utilized your skills in previous roles or projects."
+                  required rows="5"></textarea>
+
+        <!--DOCUMENT SUBMISSION
+        <label for="file"><strong>Documents</strong></label><br>
+        <input class="file" id="file" name="file" required type="file"><br>
+        <input class="file" name="file" required type="file"><br>
+        <input class="file" name="file" required type="file"><br>
+        <small>Upload necessary documents here.</small><br><br>-->
+
+
+        <!--APPLY BUTTON-->
+        <input name="submit" style="font-weight: bold;" type="submit" value="Apply">
+
+    </form>
+
+
+{% if request.path not in ['/', '/home', '/about', '/login', '/signup'] %}
+<div class="sidebar" style="height: calc(100vh - 130px);"> <!-- 130px is the combined height of navbar and footer -->
+    <a href="{{ url_for('vacancies')}}">Apply Now</a>
+    <a href="/admin/jobpost">Track Application</a>
+    <a href="/admin/jobpost">Update Profile</a>
+    {% if current_user.is_authenticated %}
+        <p>Logged in as: {{ current_user.username }}</p>
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+    {% endif %}
+    <!-- Add more links for other admin pages -->
+</div>
+{% endif %}
+</div>
+{% endblock %}
+
+

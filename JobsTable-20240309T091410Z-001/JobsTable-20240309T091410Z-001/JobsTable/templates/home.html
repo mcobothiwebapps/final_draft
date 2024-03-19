@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - EduMatch{% endblock %}
+
+{% block content %}
+<style>
+    .social-icon {
+        color: #333; /* Change to your desired color */
+    }
+
+    /* Value proposition styles */
+    .value-prop h2 {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .value-prop {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: #0056b3;
+        color: white;
+    }
+
+    .value-prop-text {
+        flex: 1;
+    }
+
+    .value-prop-video {
+        flex: 1;
+        padding-left: 20px;
+    }
+
+    .value-prop-video video {
+        width: 100%;
+        height: auto;
+    }
+
+    .get-started-cta {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    @media (max-width: 767.98px) {
+        .get-started-cta {
+            font-size: 20px;
+        }
+    }
+</style>
+
+<header>
+    <div class="container about-section"></div>
+</header>
+<video autoplay muted loop id="logo-video" height="300">
+    <source src="{{ url_for('static', filename='images/EDU1.mp4') }}" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+
+<div class="container">
+    <h2>About EduMatch+</h2>
+    <p>EduMatch+ is a revolutionary web application designed to transform the way students and professionals connect with teaching assistant and tutor positions at Durban University of Technology. By seamlessly integrating cutting-edge technology with educational opportunities, EduMatch+ creates a dynamic platform for academic and career advancement.</p>
+    <p>Our mission is to innovate the traditional job search process by providing a user-friendly interface that matches candidates with the perfect job opportunities. Whether you're a student looking to gain valuable teaching experience or an academic department seeking top-tier talent, EduMatch+ is your gateway to success.</p>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <p class="get-started-cta">Get started on your teaching journey with EduMatch+.</p>
+            <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg mb-3">Sign Up</a> <!-- Added mb-3 for bottom margin -->
+        </div>
+    </div>
+</div>
+
+<div class="value-prop">
+    <div class="value-prop-text">
+        <h2>Tutoring and Teacher Assistant Opportunities</h2>
+        <p><strong>Students:</strong></p>
+        <ul>
+            <li><strong>Application Portal:</strong> Students can apply for tutoring and TA positions.</li>
+            <li><strong>Opportunity Access:</strong> Gain access to available positions.</li>
+            <li><strong>Application Management:</strong> Easily manage and track applications.</li>
+            <li><strong>Direct Connection:</strong> Directly connect with departments offering positions.</li>
+        </ul>
+        <p><strong>Departments:</strong></p>
+        <ul>
+            <li><strong>Position Posting:</strong> Departments can post available tutoring and TA positions.</li>
+            <li><strong>Applicant Management:</strong> Manage applications and select candidates.</li>
+            <li><strong>Efficient Connection:</strong> Facilitates connecting with potential tutors and TAs.</li>
+            <li><strong>Streamlined Process:</strong> Simplifies the process of finding qualified candidates.</li>
+        </ul>
+    </div>
+    <div class="value-prop-video">
+        <video controls loop>
+            <source src="{{ url_for('static', filename='tutor.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+{% endblock %}

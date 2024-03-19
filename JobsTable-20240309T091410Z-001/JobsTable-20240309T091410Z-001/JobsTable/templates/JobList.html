@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - EduMatch{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #c2e4b9;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+        }
+
+        /* Button styles */
+        .update-button, .delete-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition effect */
+        }
+
+        /* Update button */
+        .update-button {
+            background-color: #3498db; /* Button background color */
+            color: #ffffff; /* Button text color */
+        }
+
+        /* Delete button */
+        .delete-button {
+            background-color: #e74c3c; /* Button background color */
+            color: #ffffff; /* Button text color */
+        }
+
+          .post-button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background: linear-gradient(to right, #3498db, #6ab0de);
+            color: white;
+        }
+
+        /* Button hover effect */
+        .update-button:hover, .delete-button:hover {
+            filter: brightness(90%); /* Darken the button on hover */
+        }
+
+        h1 {
+           font-size: x-large;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+    border: 2px solid #6b8294;
+    border-radius: 5px;
+    background-color: #899BA9; /* Set background color */
+    color: white; /* Set text color */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #c0cad2;
+            box-shadow: 0 0 10px black;
+            border-radius: 10px;
+        }
+
+        th, td {
+            border: 1px solid #6b8294;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #899BA9;
+            color: black;
+        }
+
+        .actions {
+            white-space: nowrap;
+        }
+    </style>
+
+<body>
+<div class="container">
+  <h1><strong>Job Listings</strong></h1>
+
+  <table>
+    <tr>
+      <th>Department</th>
+      <th>Job Title</th>
+      <th>Job Description</th>
+      <th>Requirements</th>
+      <th>Hours</th>
+      <th>Closing Date</th>
+      <th>Actions</th>
+    </tr>
+    {% for job in jobs %}
+    <tr>
+      <td>{{ job.department_name }}</td>
+      <td>{{ job.title }}</td>
+      <td>{{ job.description }}</td>
+      <td>{{ job.requirements }}</td>
+      <td>{{ job.hours }}</td>
+      <td>{{ job.deadline }}</td>
+      <td class="actions">
+        <a class="update-button" href="{{ url_for('update_job', job_id=job.id) }}">Update</a>
+        <form method="post" action="{{ url_for('delete_job', job_id=job.id) }}" style="display:inline;">
+          <button class="delete-button" type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <a class="post-button" href="{{ url_for('post_job')}}"><strong>Post Jobs</strong></a>
+</div>
+
+
+{% endblock %}
+

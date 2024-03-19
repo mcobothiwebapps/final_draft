@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}About EduMatch{% endblock %}
+
+{% block content %}
+<style>
+   .termsModal {
+    background-color: #c0cad2;
+}
+
+</style>
+<body>
+<div class="container">
+        <div class="about-section">
+            <div class="container">
+                <h2>About EduMatch</h2>
+                <p>
+                    EduMatch is a web application designed to help students and admins connect with teaching assistant and tutor positions at Durban University of Technology. Our platform provides an easy-to-use interface for both students and admins to manage their applications and positions.It aims to streamline the process of finding suitable positions for both students and academic departments.
+                </p>
+                <p>
+                    Our mission is to streamline the process of finding and applying for teaching assistant and tutor positions, making it simpler and more efficient for students and admins alike.
+                </p>
+                <!-- Button trigger modals -->
+                <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#termsModal">
+                    Terms of Service
+                </button>
+                <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#privacyModal">
+                    Privacy Policy
+                </button>
+                <!-- Modals -->
+                <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                           <div class="modal-body">
+
+    <h2>Terms of Service</h2>
+
+    <p>These Terms of Service ("Terms") govern your access to and use of EduMatch+ web app ("the Service") provided by The Great Minds ("the Company").</p>
+
+    <h3>1. Acceptance of Terms</h3>
+
+    <p>By accessing or using the Service, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Service.</p>
+
+    <h3>2. Changes to Terms</h3>
+
+    <p>The Company reserves the right to update or modify these Terms at any time without prior notice. Your continued use of the Service after any such changes constitutes your acceptance of the new Terms.</p>
+
+    <h3>3. Use of the Service</h3>
+
+    <p>You agree to use the Service only for lawful purposes and in accordance with these Terms. You are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer or device.</p>
+
+    <h3>4. Intellectual Property</h3>
+
+    <p>The Service and its original content, features, and functionality are owned by the Company and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.</p>
+
+    <h3>5. Privacy</h3>
+
+    <p>Your use of the Service is also governed by our Privacy Policy, which is incorporated into these Terms by this reference. Please review our Privacy Policy to understand our practices.</p>
+
+    <h3>6. Limitation of Liability</h3>
+
+    <p>The Company shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from (a) your use or inability to use the Service; (b) any unauthorized access to or use of our servers and/or any personal information stored therein; (c) any bugs, viruses, trojan horses, or the like that may be transmitted to or through the Service by any third party.</p>
+
+    <h3>7. Governing Law</h3>
+
+    <p>These Terms shall be governed by and construed in accordance with the laws of South Africa, without regard to its conflict of law principles.</p>
+
+    <h3>8. Contact Us</h3>
+
+    <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@edumatch.com">info@edumatch.com</a>.</p>
+
+</div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-labelledby="privacyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                           <div class="modal-body">
+
+    <h2>Privacy Policy</h2>
+
+    <p>This Privacy Policy ("Policy") describes how your personal information is collected, used, and shared when you use the EduMatch+ web app ("the Service") provided by The Great Minds ("the Company").</p>
+
+    <h3>1. Information We Collect</h3>
+
+    <p>We collect personal information you provide directly to us, such as your name, email address, and any other information you choose to provide when you register an account or use the Service.</p>
+
+    <h3>2. How We Use Your Information</h3>
+
+    <p>We may use the personal information we collect to provide and improve the Service, communicate with you, and personalize your experience. We may also use your information to comply with legal obligations and protect our rights.</p>
+
+    <h3>3. Information Sharing</h3>
+
+    <p>We may share your personal information with third-party service providers who help us operate the Service and with law enforcement or other governmental agencies when required by law.</p>
+
+    <h3>4. Data Retention</h3>
+
+    <p>We will retain your personal information for as long as necessary to fulfill the purposes outlined in this Policy unless a longer retention period is required or permitted by law.</p>
+
+    <h3>5. Your Rights</h3>
+
+    <p>You have the right to access, correct, or delete your personal information. You may also have the right to restrict or object to certain processing of your information.</p>
+
+    <h3>6. Security</h3>
+
+    <p>We take reasonable measures to protect the security of your personal information and to prevent unauthorized access, disclosure, alteration, or destruction.</p>
+
+    <h3>7. Changes to This Policy</h3>
+
+    <p>We may update this Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes by posting the updated Policy on our website or by other means.</p>
+
+    <h3>8. Contact Us</h3>
+
+    <p>If you have any questions about this Policy, please contact us at <a href="mailto:info@edumatch.com">info@edumatch.com</a>.</p>
+
+</div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact-details" style="background-color: #0056b3; color: white; padding: 20px 0; text-align: center; margin-top: 20px;">
+       <div class="container">
+            <h2>Contact Us</h2>
+            <p>Email: info@edumatch.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+            <p>Address: 123 Main Street, City, Country</p>
+        </div>
+    </div>
+
+</body>
+</html>
+{% endblock %}
